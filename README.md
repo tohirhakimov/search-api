@@ -26,7 +26,7 @@ A message should be displayed if no results were found.
 
 ## Installation
 - clone project and change directory to project folder
-- run `cp .env.example .env`
+- run `cp .env.example .env` and configure database
 - run `composer install`
 - run `npm install && npm run dev`
 - run `php artisan key:generate && php artisan migrate && php artisan seed`
