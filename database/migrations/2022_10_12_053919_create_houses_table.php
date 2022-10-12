@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('bathrooms');
             $table->integer('storeys');
             $table->integer('garages');
+            $table->timestamps();
         });
     }
 

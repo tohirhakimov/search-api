@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\House;
 use Illuminate\Support\Facades\DB;
 
 class HouseSeeder extends Seeder
@@ -15,95 +16,27 @@ class HouseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('houses')->truncate();
-        DB::table('houses')->insert([
-            'id' => 1,
-            'name' => 'The Victoria',
-            'price' => 374662,
-            'bedrooms' => 4,
-            'bathrooms' => 2,
-            'storeys' => 2,
-            'garages' => 2,
-        ]);
+        $csv_data = [
+            ['The Victoria', 374662, 4, 2, 2, 2],
+            ['The Xavier', 513268, 4, 2, 1, 2],
+            ['The Como', 454990, 4, 3, 2, 3],
+            ['The Aspen', 384356, 4, 2, 2, 2],
+            ['The Lucretia', 572002, 4, 3, 2, 2],
+            ['The Toorak', 521951, 5, 2, 1, 2],
+            ['The Skyscape', 263604, 3, 2, 2, 2],
+            ['The Clifton', 386103, 3, 2, 1, 1],
+            ['The Geneva', 390600, 4, 3, 2, 2]
+        ];
 
-        DB::table('houses')->insert([
-            'id' => 2,
-            'name' => 'The Xavier',
-            'price' => 513268,
-            'bedrooms' => 4,
-            'bathrooms' => 2,
-            'storeys' => 1,
-            'garages' => 2,
-        ]);
+        $map = ['name', 'price', 'bedrooms', 'bathrooms', 'storeys', 'garages'];
 
-        DB::table('houses')->insert([
-            'id' => 3,
-            'name' => 'The Como',
-            'price' => 454990,
-            'bedrooms' => 4,
-            'bathrooms' => 3,
-            'storeys' => 2,
-            'garages' => 3,
-        ]);
+        $data = [];
+        foreach ($csv_data as  $set) {
+            $data[] = array_combine($map, $set);
+        }
 
-        DB::table('houses')->insert([
-            'id' => 4,
-            'name' => 'The Aspen',
-            'price' => 384356,
-            'bedrooms' => 4,
-            'bathrooms' => 2,
-            'storeys' => 2,
-            'garages' => 2,
-        ]);
-
-        DB::table('houses')->insert([
-            'id' => 5,
-            'name' => 'The Lucretia',
-            'price' => 572002,
-            'bedrooms' => 4,
-            'bathrooms' => 3,
-            'storeys' => 2,
-            'garages' => 2,
-        ]);
-
-        DB::table('houses')->insert([
-            'id' => 6,
-            'name' => 'The Toorak',
-            'price' => 521951,
-            'bedrooms' => 5,
-            'bathrooms' => 2,
-            'storeys' => 1,
-            'garages' => 2,
-        ]);
-
-        DB::table('houses')->insert([
-            'id' => 7,
-            'name' => 'The Skyscape',
-            'price' => 263604,
-            'bedrooms' => 3,
-            'bathrooms' => 2,
-            'storeys' => 2,
-            'garages' => 2,
-        ]);
-
-        DB::table('houses')->insert([
-            'id' => 8,
-            'name' => 'The Clifton',
-            'price' => 386103,
-            'bedrooms' => 3,
-            'bathrooms' => 2,
-            'storeys' => 1,
-            'garages' => 1,
-        ]);
-
-        DB::table('houses')->insert([
-            'id' => 9,
-            'name' => 'The Geneva',
-            'price' => 390600,
-            'bedrooms' => 4,
-            'bathrooms' => 3,
-            'storeys' => 2,
-            'garages' => 2,
-        ]);
+        foreach ($data as $house) {
+            House::create($house);
+        }
     }
 }
